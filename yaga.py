@@ -51,8 +51,8 @@ def run(tokens):
         elif tokens[token_pointer].tokenType == tokenType.end_loop:
             if memory[mem_pointer] != 0:
                 token_pointer = tokens[token_pointer].goTo
-                print(token_pointer)
-            continue
+                continue
+            pass
         elif tokens[token_pointer].tokenType == tokenType.left:
             if mem_pointer - 1 >= mem_min_left:
                 mem_pointer -= 1
@@ -74,9 +74,9 @@ def run(tokens):
                 arr += "[" + str(val) + "]"
             print(arr)
         elif tokens[token_pointer].tokenType == tokenType.print_current_char:
-            print(chr(tokens[token_pointer]) + "\n")
+            print(chr(memory[mem_pointer]), end="")
         elif tokens[token_pointer].tokenType == tokenType.print_current_val:
-            print(tokens[token_pointer] + "\n")
+            print(memory[mem_pointer], end="")
         elif tokens[token_pointer].tokenType == tokenType.accept_input:
             stdin = input("> ")
             if type(stdin) is not int:
