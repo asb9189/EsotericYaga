@@ -3,7 +3,7 @@ import sys
 from yagayaga import valid_file, tokenize
 from Token import tokenType
 
-mem_len = 12
+mem_len = 64
 mem_pointer = 0
 mem_max_right = mem_len - 1
 mem_min_left = 0
@@ -13,9 +13,12 @@ mem_decrement_value = 1
 def main():
 
     if len(sys.argv) == 2:
-        run_file(sys.argv[1])
+        if sys.argv[1].endswith(".yaga"):
+            run_file(sys.argv[1])
+        else:
+            print("File missing '.yaga' extension")
     else:
-        print("python3 yaga.py [file]")
+        print("python3 yaga.py [file].yaga")
 
 def run_file(file):
     is_valid = valid_file(file)
@@ -44,10 +47,11 @@ def run(tokens):
         elif tokens[token_pointer].tokenType == tokenType.decrement:
             memory[mem_pointer] = memory[mem_pointer] - mem_decrement_value
         elif tokens[token_pointer].tokenType == tokenType.start_loop:
-            continue
+            pass
         elif tokens[token_pointer].tokenType == tokenType.end_loop:
             if memory[mem_pointer] != 0:
                 token_pointer = tokens[token_pointer].goTo
+                print(token_pointer)
             continue
         elif tokens[token_pointer].tokenType == tokenType.left:
             if mem_pointer - 1 >= mem_min_left:
