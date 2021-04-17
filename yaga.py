@@ -6,7 +6,7 @@ from Token import tokenType
 mem_len = 12
 mem_pointer = 0
 mem_max_right = mem_len - 1
-men_min_left = 0
+mem_min_left = 0
 mem_increment_value = 1
 mem_decrement_value = 1
 
@@ -32,6 +32,14 @@ def run_file(file):
     run(tokens)
 
 def run(tokens):
+
+    global mem_len
+    global mem_pointer
+    global mem_max_right
+    global mem_min_left
+    global mem_increment_value
+    global mem_decrement_value
+
     memory = [0] * mem_len
     token_pointer = 0
 
@@ -45,28 +53,39 @@ def run(tokens):
         elif tokens[token_pointer].tokenType == tokenType.end_loop:
             if memory[mem_pointer] != 0:
                 token_pointer = tokens[token_pointer].goTo
+            continue
         elif tokens[token_pointer].tokenType == tokenType.left:
-            pass
+            if token_pointer - 1 >= mem_min_left:
+                token_pointer -= 1
         elif tokens[token_pointer].tokenType == tokenType.right:
-            pass
+            if token_pointer + 1 <= mem_max_right:
+                token_pointer += 1
         elif tokens[token_pointer].tokenType == tokenType.set_increment:
-            pass
+            mem_increment_value = tokens[token_pointer].value
         elif tokens[token_pointer].tokenType == tokenType.set_decrement:
-            pass
+            mem_decrement_value = tokens[token_pointer].value
         elif tokens[token_pointer].tokenType == tokenType.print_chars:
-            pass
+            for val in memory:
+                print(val, end='')
         elif tokens[token_pointer].tokenType == tokenType.print_vals:
-            pass
+            for val in memory:
+                print(chr(val), end='')
         elif tokens[token_pointer].tokenType == tokenType.print_current_char:
-            pass
+            print(chr(tokens[token_pointer]))
         elif tokens[token_pointer].tokenType == tokenType.print_current_val:
-            pass
+            print(tokens[token_pointer])
         elif tokens[token_pointer].tokenType == tokenType.accept_input:
-            pass
+            stdin = input("> ")
+            if type(stdin) is not int:
+                raise Exception(f"Input must be of type 'int'")
         elif tokens[token_pointer].tokenType == tokenType.reset:
-            pass
+            for i in range(0, len(memory)):
+                memory[i] = 0
+            mem_pointer = 0
         else:
             raise Exception(f"Unknown yaga instruction '{tokens[token_pointer]}'")
+
+        token_pointer += 1
 
 
 if __name__ == "__main__":

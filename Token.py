@@ -23,6 +23,10 @@ class token:
         self.tokenType = tokenType
         self.index = None
         self.goTo = None
+        self.value = None
+
+        if tokenType == tokenType.set_increment or tokenType == tokenType.set_decrement:
+            self.value = int(lex[5:])
 
     def __str__(self):
         token_as_string = f"Lex: {self.lex}\nToken Type: {self.tokenType}\nIndex: {self.index}\nGo To: {self.goTo}"
