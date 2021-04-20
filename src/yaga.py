@@ -2,9 +2,9 @@
 
 import sys
 from yagayaga import valid_file, tokenize
-from Token import tokenType
+from token import tokenType
 
-mem_len = 64
+mem_len = 16
 mem_pointer = 0
 mem_max_right = mem_len - 1
 mem_min_left = 0
@@ -24,7 +24,7 @@ def main():
 def run_file(file):
     is_valid = valid_file(file)
     if not is_valid:
-        print("Invalid file")
+        print(f"{file} is malformed")
         sys.exit()
 
     tokens = tokenize(file)
@@ -53,7 +53,6 @@ def run(tokens):
             if memory[mem_pointer] != 0:
                 token_pointer = tokens[token_pointer].goTo
                 continue
-            pass
         elif tokens[token_pointer].tokenType == tokenType.left:
             if mem_pointer - 1 >= mem_min_left:
                 mem_pointer -= 1
@@ -79,8 +78,10 @@ def run(tokens):
         elif tokens[token_pointer].tokenType == tokenType.print_current_val:
             print(memory[mem_pointer], end="")
         elif tokens[token_pointer].tokenType == tokenType.accept_input:
-            stdin = input("> ")
-            if type(stdin) is not int:
+            try:
+                stdin = int(input("> "))
+                memory[mem_pointer] = stdin
+            except Exception:
                 raise Exception(f"Input must be of type 'int'")
         elif tokens[token_pointer].tokenType == tokenType.reset:
             for i in range(0, len(memory)):

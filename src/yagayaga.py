@@ -1,7 +1,7 @@
 
 import re
-from lexemes import simple_lexemes
-from Token import token, tokenType
+from lexemes import simple_lexemes, simple_lex_to_token_type
+from token import token, tokenType
 complex_lexemes_pattern = re.compile(r"(^Yaga=\d*$|^yAga=\d*$|^yaga$|^YAGA$)")
 
 def valid_file(file):
@@ -38,28 +38,10 @@ def _tokenize(lexemes):
     tokens = []
     for lex in lexemes:
         if lex in simple_lexemes:
-            if lex == "Yaga":
-                tokens.append(token(lex, tokenType.increment))
-            elif lex == "yAga":
-                tokens.append(token(lex, tokenType.decrement))
-            elif lex == "yaGa":
-                tokens.append(token(lex, tokenType.left))
-            elif lex == "yagA":
-                tokens.append(token(lex, tokenType.right))
-            elif lex == "yagayaga":
-                tokens.append(token(lex, tokenType.print_chars))
-            elif lex == "YAGAYAGA":
-                tokens.append(token(lex, tokenType.print_vals))
-            elif lex == "yagaYAGA":
-                tokens.append(token(lex, tokenType.print_current_char))
-            elif lex == "YAGAyaga":
-                tokens.append(token(lex, tokenType.print_current_val))
-            elif lex == "agay":
-                tokens.append(token(lex, tokenType.accept_input))
-            elif lex == "AGAY":
-                tokens.append(token(lex, tokenType.reset))
-            else:
-                raise Exception(f"unknown lexeme '{lex}'")
+            try:
+                tokens.append(token(lex, simple_lex_to_token_type[lex]))
+            except KeyError:
+                raise Exception(f"unknown simple lexeme '{lex}'")
         elif complex_lexemes_pattern.match(lex):
             if lex.startswith("Yaga="):
                 tokens.append(token(lex, tokenType.set_increment))

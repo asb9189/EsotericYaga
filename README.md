@@ -1,37 +1,85 @@
-## Welcome to GitHub Pages
+# Getting Started with Yaga
 
-You can use the [editor on GitHub](https://github.com/asb9189/Yaga/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+## A Gentle Introduction
+Yaga was designed with the user experience being first and foremost. Even though
+Yaga was developed in under three hours. I poured my heart and soul
+into the documentation and not a scanner that provides you with helpful
+error messages. (If my interperter won't accept your .yaga file your guess is as good as mine)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Unlike most programming languages, you won't need a Udemy degree to
+become proficient with Yaga. Grab your favorite beverage, clean the keyboard
+of gamer gunk, and buckle up because everything you learned in school is
+going to be just as useless as this programming language is.
 
-### Markdown
+### Learning the Ropes
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+As mentioned previously, Yaga has several keywords accessible to you at no cost.
+But before we can dive in, it's important to understand how Yaga work's under the hood.
+
+Yaga is quite nice and loans you a chunk of memory (184 bytes to be exact) at the start of each process.
+With the help of Yaga, you can manipulate this chunk of memory by shifting a single
+pointer to the **right** or to the **left**. Let's go ahead and try it!
 
 ```markdown
-Syntax highlighted code block
+# Remember when I said 184 bytes? Yaga loans us an array of size 16!
+# Try spinning up a Python3 REPL and type: print(sys.getsizeof([0] * 16))
+# Yaga also set's the pointer to point to the first element in memory (always)
+Memory: [0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0]
+Pointer: ^
 
-# Header 1
-## Header 2
-### Header 3
+The Keywords Yaga and yAga increment and decrement the value the pointer is pointing too respectfully.
 
-- Bulleted
-- List
+Let's make a file called test.yaga
 
-1. Numbered
-2. List
+# Did I forget to mention Yaga only cares that you put white space between
+# each keyword. You can have your code all on one line or one keyword
+# for every new line. Anything in the file Yaga doesn't recognize is treated
+# as a comment. Theoretically, you could copy and paste something from wiki
+# and Yaga will always attempt to interpret it and potentially output some interesting results.
+test.yaga
+    
+    This program will increment the value the pointer is pointing too by two then decrement it by one
+    Yaga Yaga yAga
+    
+After running Python3 yaga.py test.yaga our memory will look like the following:
+Memory: [1][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0]
 
-**Bold** and _Italic_ and `Code` text
+But what if we wanted to print out the memory as we execute our code? No problem Yaga has you covered!
+Try using the YAGAYAGA keyword in your own .yaga file ;)
 
-[Link](url) and ![Image](src)
+At this point you have learned roughly a third of the language. The next portion is moving the pointer.
+
+Let's rewrite our test.yaga
+
+test.yaga
+
+    Yaga yagA
+    yAga yAga yAga yaGa
+    
+After running python3 yaga.py test.yaga our memory and pointer will look like the following:
+Memory: [1][-3][0][0][0][0][0][0][0][0][0][0][0][0][0][0]
+Pointer:    ^
+
+Hopefully you can guess what yagA and yaGa do but if you can't heres a little help.
+yagA shifts the pointer to the right and yaGa shifts the pointer to the left.
+
+That's it!
+
+Rather than dragging on this documentation page I thought it would be better to give
+two in-depth examples and then leave a cheat sheet at the end containing all the Yaga keywords.
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+```markdown
+         
+Yaga
+yAga
+yaGa
+yagA
+yagayaga
+YAGAYAG
+yagaYAGA
+YAGAyaga
+agay
+AGAY
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/asb9189/Yaga/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```
