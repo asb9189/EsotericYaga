@@ -9,10 +9,9 @@ error messages. (If my interperter won't accept your .yaga file your guess is as
 Unlike most programming languages, you won't need a Udemy degree to
 become proficient with Yaga. Grab your favorite beverage, clean the keyboard
 of gamer gunk, and buckle up because everything you learned in school is
-going to be just as useless as this programming language is.
+going to be just as useless as this programming language.
 
 ### Learning the Ropes
-
 As mentioned previously, Yaga has several keywords accessible to you at no cost.
 But before we can dive in, it's important to understand how Yaga work's under the hood.
 
@@ -23,11 +22,11 @@ pointer to the **right** or to the **left**. Let's go ahead and try it!
 ```markdown
 # Remember when I said 184 bytes? Yaga loans us an array of size 16!
 # Try spinning up a Python3 REPL and type: print(sys.getsizeof([0] * 16))
-# Yaga also set's the pointer to point to the first element in memory (always)
+# Yaga also sets the pointer to point to the first element in memory (always)
 Memory: [0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0]
 Pointer: ^
 
-The Keywords Yaga and yAga increment and decrement the value the pointer is pointing too respectfully.
+The Keywords Yaga and yAga increment and decrement the value the pointer is pointing to respectfully.
 
 Let's make a file called test.yaga
 
